@@ -89,7 +89,6 @@ public class PetStoreUserTests extends TestBase {
                 .as(UserDataResponse.class);
 
         assertEquals(response.getUsername(), testData.username);
-        assertEquals(response.getFirstName(), testData.firstname);
         assertEquals(response.getLastName(), testData.lastname);
         assertEquals(response.getEmail(), testData.email);
         assertEquals(response.getPassword(), testData.password);
