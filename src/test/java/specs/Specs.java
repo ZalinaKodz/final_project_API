@@ -18,4 +18,8 @@ public class Specs {
             .log(ALL)
             .expectStatusCode(200)
             .build();
+    public static ResponseSpecification responseDeleteSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(404)
+            .build();
 }

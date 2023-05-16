@@ -4,6 +4,7 @@ import models.*;
 
 import org.junit.jupiter.api.*;
 import specs.Specs;
+import tests.TestBase;
 
 import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.given;
@@ -13,7 +14,10 @@ import static specs.Specs.responseSpec;
 
 public class PetStoreUserTests extends TestBase {
 
+    TestData testData = new TestData();
+
     @Test
+    @DisplayName("Create user")
     void createUser() {
 
         UserData user = new UserData();
@@ -49,8 +53,8 @@ public class PetStoreUserTests extends TestBase {
     void checkLogin() {
 
         Login loginUser = new Login();
-        loginUser.setUsername("Vicente");
-        loginUser.setPassword("7hrvwk5pdvk1u");
+        loginUser.setUsername(testData.username);
+        loginUser.setPassword(testData.password);
 
         UserResponse response = given()
                 .filter(withCustomTemplates())
@@ -70,7 +74,7 @@ public class PetStoreUserTests extends TestBase {
     }
 
     @Test
-    @DisplayName("Get user by user name")
+    @DisplayName("Get user by  name")
     void checkUserByName() {
 
         UserDataResponse response = given()

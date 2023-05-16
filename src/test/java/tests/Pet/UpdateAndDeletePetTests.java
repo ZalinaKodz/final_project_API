@@ -4,6 +4,7 @@ import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import specs.Specs;
+import tests.TestBase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,8 @@ import static specs.Specs.responseSpec;
 
 
 public class UpdateAndDeletePetTests extends TestBase {
+
+    PetsTestData petData = new PetsTestData();
     @Test
     @DisplayName("Update pet`s information")
     void updatePet() {
@@ -33,7 +36,7 @@ public class UpdateAndDeletePetTests extends TestBase {
         PetModel pet = new PetModel();
         pet.setId(petData.petId);
         pet.setCategory(category);
-        pet.setName(petData.petName);
+        pet.setName("Charlie");
         pet.setPhotoUrls(Arrays.asList(petData.photoUrl));
         pet.setTags(tags);
         pet.setStatus(petData.petStatus);
@@ -51,7 +54,7 @@ public class UpdateAndDeletePetTests extends TestBase {
                 .as(PetDataResponse.class);
 
         assertEquals(petData.categoryName, response.getCategory().getName());
-        assertEquals(petData.petName, response.getName());
+        assertEquals("Charlie", response.getName());
         assertEquals(petData.tagName, response.getTags().get(0).getName());
         assertEquals(petData.petStatus, response.getStatus());
 
@@ -59,8 +62,7 @@ public class UpdateAndDeletePetTests extends TestBase {
 
     @Test
     @DisplayName("Delete pet by id")
-    void deletePetTesr() {
-
+    void deletePetTest() {
 
         PetResponse response = given()
                 .filter(withCustomTemplates())

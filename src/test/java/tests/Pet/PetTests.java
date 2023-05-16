@@ -4,7 +4,7 @@ import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import specs.Specs;
-import tests.User.TestBase;
+import tests.TestBase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,9 +18,11 @@ import static specs.Specs.responseSpec;
 
 public class PetTests extends TestBase {
 
+    PetsTestData petData = new PetsTestData();
+
     @Test
     @DisplayName("Create pet")
-    void createPet() {
+    void сheckCreatePet() {
 
         Category category = new Category();
         category.setId(petData.categoryId);

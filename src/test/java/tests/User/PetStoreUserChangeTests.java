@@ -5,14 +5,17 @@ import models.UserResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import specs.Specs;
+import tests.TestBase;
 
 import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static specs.Specs.responseDeleteSpec;
 import static specs.Specs.responseSpec;
 
 public class PetStoreUserChangeTests extends TestBase {
+    TestData testData = new TestData();
 
     @Test
     @DisplayName("Update user")
@@ -21,7 +24,7 @@ public class PetStoreUserChangeTests extends TestBase {
         UserData user = new UserData();
         user.setId(testData.id);
         user.setUsername(testData.username);
-        user.setFirstName(testData.firstname);
+        user.setFirstName("Sonya");
         user.setLastName(testData.lastname);
         user.setEmail(testData.email);
         user.setPassword(testData.password);
@@ -47,19 +50,16 @@ public class PetStoreUserChangeTests extends TestBase {
     }
 
     @Test
-    void deletePetTest() {
+    @DisplayName("Try to delete by name user, who is not exist")
+    void deleteUserTest() {
 
-        UserResponse response = given()
+                 given()
                 .filter(withCustomTemplates())
                 .spec(Specs.request)
                 .when()
-                .delete("/user/" + testData.username)
+                .delete("/user/" + "Vasya")
                 .then()
-                .spec(responseSpec)
-                .extract()
-                .response()
-                .as(UserResponse.class);
+                .spec(responseDeleteSpec);
 
-        assertEquals(response.getCode(), 200);
     }
 }
